@@ -61,7 +61,7 @@ bolts(x + 75, y + 120);
 beginShape();
 fill(255, 21, 0);
 noStroke();
-vertex(x + 27, y + 163);
+vertex(x + 27, y + 160);
 vertex(x + 22, y + 173);
 vertex(x + 32, y + 168);
 vertex(x + 27, y + 188);
@@ -71,7 +71,7 @@ vertex(x + 63, y + 178);
 vertex(x + 73, y + 188);
 vertex(x + 68, y + 168);
 vertex(x + 78, y + 173);
-vertex(x + 73, y + 163);
+vertex(x + 73, y + 160);
 endShape(CLOSE);
 
 beginShape();
