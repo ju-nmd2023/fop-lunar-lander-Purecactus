@@ -100,6 +100,7 @@ function draw() {
   velocity = velocity + acceleration;
 
   if (mouseIsPressed) {
-    velocity = velocity;
+    // This adds a click function that makes the rocket fly
+    velocity = velocity - 4 * acceleration;
   }
 }
