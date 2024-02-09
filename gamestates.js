@@ -1,5 +1,6 @@
 let state = "start";
-let gameOverTimer = 0;
+let gameOverTimer = 0; // A variable that brings the game back to the start scrreen after some time
+let gameIsRunning = true; // A variable that detects if the game is running or not
 
 function startScreen() {
   background(40, 40, 40);
@@ -37,7 +38,5 @@ function draw() {
 function mouseClicked() {
   if (state === "start") {
     state = "game";
-  } else if (state === "game") {
-    state = "gameOver";
   }
 }
