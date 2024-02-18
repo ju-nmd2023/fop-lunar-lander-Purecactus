@@ -144,7 +144,6 @@ function draw() {
     gameScreen();
   } else if (state === "gameOver") {
     gameOverScreen();
-    noLoop();
   }
   if (gameIsRunning === false) {
     state = "gameOver";
