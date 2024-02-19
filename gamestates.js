@@ -4,8 +4,36 @@ let gameIsRunning = true; // A variable that detects if the game is running or n
 
 createCanvas(500, 700);
 
+// This is my function for the starry background, I stole it from Garrit
+function backGround() {
+  push();
+  noStroke();
+  background(0);
+
+  for (let index in starX) {
+    fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
+    ellipse(starX[index], starY[index], 2);
+    starAlpha[index] = starAlpha[index] + 0.01;
+  }
+  pop();
+}
+
+let starX = [];
+let starY = [];
+let starAlpha = [];
+
+for (let i = 0; i < 300; i++) {
+  const x = Math.floor(Math.random() * width);
+  const y = Math.floor(Math.random() * height);
+  const alpha = Math.random();
+
+  starX.push(x);
+  starY.push(y);
+  starAlpha.push(alpha);
+}
+
+// This is my function for the rocketship
 function rocket(x, y) {
-  // I need to make it scaleable
   // The body of the rocket
   push();
   noStroke();
@@ -95,7 +123,8 @@ function rocket(x, y) {
 }
 
 function startScreen() {
-  background(40, 40, 200);
+  backGround();
+  fill(255);
   text("Start", 130, 225);
   textSize(60);
 }
@@ -105,7 +134,7 @@ let velocity = 1;
 const acceleration = 0.2;
 
 function gameScreen() {
-  background(0, 0, 0);
+  backGround();
   rocket(200, rocketY);
 
   rocketY = rocketY + velocity;
@@ -123,7 +152,8 @@ function gameScreen() {
 }
 
 function gameOverScreen() {
-  background(200, 30, 30);
+  backGround();
+  fill(255);
   text("Game Over", 130, 225);
   textSize(60);
 }

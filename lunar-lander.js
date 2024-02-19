@@ -1,5 +1,39 @@
+let state = "start";
+let gameOverTimer = 0; // A variable that brings the game back to the start scrreen after some time
+let gameIsRunning = true; // A variable that detects if the game is running or not
+
+createCanvas(500, 700);
+
+// This is my function for the starry background, I stole it from Garrit
+function backGround() {
+  push();
+  noStroke();
+  background(0);
+
+  for (let index in starX) {
+    fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
+    ellipse(starX[index], starY[index], 2);
+    starAlpha[index] = starAlpha[index] + 0.01;
+  }
+  pop();
+}
+
+let starX = [];
+let starY = [];
+let starAlpha = [];
+
+for (let i = 0; i < 300; i++) {
+  const x = Math.floor(Math.random() * width);
+  const y = Math.floor(Math.random() * height);
+  const alpha = Math.random();
+
+  starX.push(x);
+  starY.push(y);
+  starAlpha.push(alpha);
+}
+
+// This is my function for the rocketship
 function rocket(x, y) {
-  // I need to make it scaleable
   // The body of the rocket
   push();
   noStroke();
@@ -88,13 +122,20 @@ function rocket(x, y) {
   endShape(CLOSE);
 }
 
+function startScreen() {
+  backGround();
+  fill(255);
+  text("Start", 130, 225);
+  textSize(60);
+}
+
 let rocketY = 200; // This allows us to add movement to the rocketship
 let velocity = 1;
 const acceleration = 0.2;
 
-function draw() {
-  background(10);
-  rocket(500, rocketY);
+function gameScreen() {
+  backGround();
+  rocket(200, rocketY);
 
   rocketY = rocketY + velocity;
   velocity = velocity + acceleration;
@@ -102,5 +143,42 @@ function draw() {
   if (mouseIsPressed) {
     // This adds a click function that makes the rocket fly
     velocity = velocity - 4 * acceleration;
+  }
+
+  if (rocketY > 450 && velocity > 7) {
+    gameIsRunning = false;
+    console.log("Game over!");
+  } else if (rocketY > 450 && velocity < 7) {
+    gameIsRunning = false;
+    console.log("Landing Successfull!");
+  }
+}
+
+function gameOverScreen() {
+  backGround();
+  fill(255);
+  text("Result", 130, 225);
+  textSize(60);
+}
+
+function mouseClicked() {
+  if (state === "start") {
+    state = "game";
+  }
+  if (state === "gameOver") {
+    state = "start";
+  }
+}
+
+function draw() {
+  if (state === "start") {
+    startScreen();
+  } else if (state === "game") {
+    gameScreen();
+  } else if (state === "gameOver") {
+    gameOverScreen();
+  }
+  if (gameIsRunning === false) {
+    state = "gameOver";
   }
 }
