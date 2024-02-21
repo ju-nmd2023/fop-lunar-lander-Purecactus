@@ -1,5 +1,4 @@
 let state = "start";
-let gameOverTimer = 0; // A variable that brings the game back to the start scrreen after some time
 let gameIsRunning = true; // A variable that detects if the game is running or not
 
 createCanvas(500, 700);
@@ -33,29 +32,45 @@ for (let i = 0; i < 300; i++) {
 }
 
 // This is my function for the rocketship
-function rocket(x, y) {
+function rocket(x, y, s) {
   // The body of the rocket
   push();
   noStroke();
   fill(251, 144, 98);
-  rect(x, y, 100, 150, 20);
+  rect(x, y, 100 * s, 150 * s, 20 * s);
   fill(255, 254, 242);
-  rect(x, y, 100, 100);
+  rect(x, y, 100 * s, 100 * s);
 
   fill(251, 144, 98);
-  arc(x + 50, y, 100, 170, PI, 2 * PI);
+  arc(x + 50 * s, y, 100 * s, 170 * s, PI, 2 * PI);
   fill(255, 254, 242);
-  quad(x + 20, y + 150, x + 25, y + 160, x + 75, y + 160, x + 80, y + 150);
+  quad(
+    x + 20 * s,
+    y + 150 * s,
+    x + 25 * s,
+    y + 160 * s,
+    x + 75 * s,
+    y + 160 * s,
+    x + 80 * s,
+    y + 150 * s
+  );
 
   beginShape();
   fill(255, 254, 242);
-  vertex(x + 100, y + 25);
-  bezierVertex(x + 130, y + 60, x + 160, y + 90, x + 100, y + 90);
+  vertex(x + 100 * s, y + 25 * s);
+  bezierVertex(
+    x + 130 * s,
+    y + 60 * s,
+    x + 160 * s,
+    y + 90 * s,
+    x + 100 * s,
+    y + 90 * s
+  );
   endShape();
 
   beginShape();
-  vertex(x, y + 25);
-  bezierVertex(x - 30, y + 60, x - 60, y + 90, x, y + 90);
+  vertex(x, y + 25 * s);
+  bezierVertex(x - 30 * s, y + 60 * s, x - 60 * s, y + 90 * s, x, y + 90 * s);
   endShape();
   pop();
 
@@ -64,108 +79,176 @@ function rocket(x, y) {
   strokeWeight(3);
   stroke(160);
   fill(0, 210, 255);
-  ellipse(x + 50, y + 50, 70);
+  ellipse(x + 50 * s, y + 50 * s, 70 * s);
 
   push();
   beginShape();
   noStroke();
   fill(255);
-  vertex(x + 25, y + 50);
-  bezierVertex(x + 25, y + 50, x + 20, y + 70, x + 50, y + 75);
-  bezierVertex(x + 50, y + 75, x + 55, y + 72.5, x + 50, y + 70);
-  bezierVertex(x + 50, y + 70, x + 30, y + 70, x + 30, y + 50);
-  bezierVertex(x + 30, y + 50, x + 27.5, y + 45, x + 25, y + 50);
+  vertex(x + 25 * s, y + 50 * s);
+  bezierVertex(
+    x + 25 * s,
+    y + 50 * s,
+    x + 20 * s,
+    y + 70 * s,
+    x + 50 * s,
+    y + 75 * s
+  );
+  bezierVertex(
+    x + 50 * s,
+    y + 75 * s,
+    x + 55 * s,
+    y + 72.5 * s,
+    x + 50 * s,
+    y + 70 * s
+  );
+  bezierVertex(
+    x + 50 * s,
+    y + 70 * s,
+    x + 30 * s,
+    y + 70 * s,
+    x + 30 * s,
+    y + 50 * s
+  );
+  bezierVertex(
+    x + 30 * s,
+    y + 50 * s,
+    x + 27.5 * s,
+    y + 45 * s,
+    x + 25 * s,
+    y + 50 * s
+  );
   endShape();
   pop();
 
   // Details
   function bolts(x, y) {
     fill(160);
-    ellipse(x, y, 8);
+    ellipse(x, y, 8 * s);
   }
 
-  bolts(x + 25, y + 120);
-  bolts(x + 50, y + 120);
-  bolts(x + 75, y + 120);
+  bolts(x + 25 * s, y + 120 * s);
+  bolts(x + 50 * s, y + 120 * s);
+  bolts(x + 75 * s, y + 120 * s);
 
   // Fire object "for animation"
   beginShape();
   fill(255, 21, 0);
   noStroke();
-  vertex(x + 27, y + 160);
-  vertex(x + 22, y + 173);
-  vertex(x + 32, y + 168);
-  vertex(x + 27, y + 188);
-  vertex(x + 37, y + 178);
-  vertex(x + 50, y + 203); //Middle point
-  vertex(x + 63, y + 178);
-  vertex(x + 73, y + 188);
-  vertex(x + 68, y + 168);
-  vertex(x + 78, y + 173);
-  vertex(x + 73, y + 160);
+  vertex(x + 27 * s, y + 160 * s);
+  vertex(x + 22 * s, y + 173 * s);
+  vertex(x + 32 * s, y + 168 * s);
+  vertex(x + 27 * s, y + 188 * s);
+  vertex(x + 37 * s, y + 178 * s);
+  vertex(x + 50 * s, y + 203 * s); //Middle point
+  vertex(x + 63 * s, y + 178 * s);
+  vertex(x + 73 * s, y + 188 * s);
+  vertex(x + 68 * s, y + 168 * s);
+  vertex(x + 78 * s, y + 173 * s);
+  vertex(x + 73 * s, y + 160 * s);
   endShape(CLOSE);
 
   beginShape();
   fill(255, 128, 0);
   noStroke();
-  vertex(x + 30, y + 160);
-  vertex(x + 25, y + 170);
-  vertex(x + 35, y + 165);
-  vertex(x + 30, y + 185);
-  vertex(x + 40, y + 175);
-  vertex(x + 50, y + 200); //Middle point
-  vertex(x + 60, y + 175);
-  vertex(x + 70, y + 185);
-  vertex(x + 65, y + 165);
-  vertex(x + 75, y + 170);
-  vertex(x + 70, y + 160);
+  vertex(x + 30 * s, y + 160 * s);
+  vertex(x + 25 * s, y + 170 * s);
+  vertex(x + 35 * s, y + 165 * s);
+  vertex(x + 30 * s, y + 185 * s);
+  vertex(x + 40 * s, y + 175 * s);
+  vertex(x + 50 * s, y + 200 * s); //Middle point
+  vertex(x + 60 * s, y + 175 * s);
+  vertex(x + 70 * s, y + 185 * s);
+  vertex(x + 65 * s, y + 165 * s);
+  vertex(x + 75 * s, y + 170 * s);
+  vertex(x + 70 * s, y + 160 * s);
   endShape(CLOSE);
 }
 
 function startScreen() {
   backGround();
   fill(255);
-  text("Start", 130, 225);
   textSize(60);
+  text("Lunar lander", 80, 225);
+  textSize(30);
+  text("click to begin landing sequence", 40, 400);
 }
 
-let rocketY = 200; // This allows us to add movement to the rocketship
+let rocketY = 0; // This allows us to add movement to the rocketship
 let velocity = 1;
 const acceleration = 0.2;
 
 function gameScreen() {
   backGround();
-  rocket(200, rocketY);
+
+  beginShape();
+  fill(100);
+  vertex(0, 600);
+  vertex(0, 700);
+  vertex(500, 700);
+  vertex(500, 600);
+  endShape();
+
+  rocket(200, rocketY, 0.8);
 
   rocketY = rocketY + velocity;
   velocity = velocity + acceleration;
 
-  if (mouseIsPressed) {
-    // This adds a click function that makes the rocket fly
+  if (keyIsDown(32)) {
+    /* This adds a click function that makes the rocket fly up 
+    when you press the spacebar */
     velocity = velocity - 4 * acceleration;
   }
 
-  if (rocketY > 450 && velocity > 7) {
+  if (rocketY > 480 && velocity > 4) {
     gameIsRunning = false;
-    console.log("Game over!");
-  } else if (rocketY > 450 && velocity < 7) {
+  } else if (rocketY > 480 && velocity < 4) {
     gameIsRunning = false;
-    console.log("Landing Successfull!");
   }
 }
 
-function gameOverScreen() {
+function gameSuccess() {
   backGround();
+
+  beginShape();
+  fill(100);
+  vertex(0, 600);
+  vertex(0, 700);
+  vertex(500, 700);
+  vertex(500, 600);
+  endShape();
+
   fill(255);
-  text("Result", 130, 225);
-  textSize(60);
+  textSize(50);
+  text("Succesfull landing", 50, 225);
+  textSize(30);
+  text("Click to restart", 150, 400);
+}
+
+function gameOver() {
+  backGround();
+
+  beginShape();
+  fill(100);
+  vertex(0, 600);
+  vertex(0, 700);
+  vertex(500, 700);
+  vertex(500, 600);
+  endShape();
+
+  fill(255);
+  textSize(50);
+  text("Landing failed", 100, 225);
+  textSize(30);
+  text("Click to restart", 150, 400);
 }
 
 function mouseClicked() {
   if (state === "start") {
     state = "game";
-  }
-  if (state === "gameOver") {
+  } else if (state === "success") {
+    state = "start";
+  } else if (state === "fail") {
     state = "start";
   }
 }
@@ -175,10 +258,22 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     gameScreen();
-  } else if (state === "gameOver") {
-    gameOverScreen();
+  } else if (state === "success") {
+    gameSuccess();
+  } else if (state === "fail") {
+    gameOver();
   }
-  if (gameIsRunning === false) {
-    state = "gameOver";
+
+  if (gameIsRunning === false && velocity < 4) {
+    state = "success";
+    gameIsRunning = "true";
+    rocketY = 0;
+    velocity = 1;
+  }
+  if (gameIsRunning === false && velocity > 4) {
+    state = "fail";
+    gameIsRunning = "true";
+    rocketY = 0;
+    velocity = 1;
   }
 }

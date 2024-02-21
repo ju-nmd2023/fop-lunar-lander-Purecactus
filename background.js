@@ -28,4 +28,11 @@ function draw() {
     starAlpha[index] = starAlpha[index] + 0.01;
   }
   pop();
+  beginShape();
+  fill(100);
+  vertex(0, 600);
+  vertex(0, 700);
+  vertex(500, 700);
+  vertex(500, 600);
+  endShape();
 }
