@@ -17,7 +17,12 @@
   {
     "kind": 2,
     "language": "javascript",
-    "value": "// Here I will create a background with animated stars\r\n\r\ncreateCanvas(500, 700);\r\n\r\n// I stole this from the lecture in canvas\r\nlet starX = [];\r\nlet starY = [];\r\nlet starAlpha = [];\r\n\r\nfor (let i = 0; i < 300; i++) {\r\n  const x = Math.floor(Math.random() * width);\r\n  const y = Math.floor(Math.random() * height);\r\n  const alpha = Math.random();\r\n\r\n  starX.push(x);\r\n  starY.push(y);\r\n  starAlpha.push(alpha);\r\n}\r\n\r\nfunction draw() {\r\n  push();\r\n  noStroke();\r\n  background(0);\r\n\r\n  for (let index in starX) {\r\n    fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);\r\n    ellipse(starX[index], starY[index], 2);\r\n    starAlpha[index] = starAlpha[index] + 0.01;\r\n  }\r\n}"
+    "value": ""
+  },
+  {
+    "kind": 2,
+    "language": "javascript",
+    "value": "// Here I will create a background with animated stars\r\n\r\ncreateCanvas(500, 700);\r\n\r\n// I stole this from the lecture in canvas\r\nlet starX = [];\r\nlet starY = [];\r\nlet starAlpha = [];\r\n\r\nfor (let i = 0; i < 300; i++) {\r\n  const x = Math.floor(Math.random() * width); \r\n  const y = Math.floor(Math.random() * height); \r\n  const alpha = Math.random(); \r\n\r\n  starX.push(x);\r\n  starY.push(y);\r\n  starAlpha.push(alpha);\r\n}\r\n\r\nfunction draw() {\r\n  push();\r\n  noStroke();\r\n  background(0);\r\n\r\n  for (let index in starX) {\r\n    fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);\r\n    ellipse(starX[index], starY[index], 2);\r\n    starAlpha[index] = starAlpha[index] + 0.01;\r\n  }\r\n}"
   },
   {
     "kind": 1,
