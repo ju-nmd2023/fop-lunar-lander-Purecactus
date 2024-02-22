@@ -1,9 +1,13 @@
+function setup() {
+  createCanvas(1200, 700);
+  frameRate(30);
+  textAlign(CENTER);
+  rocketY = 0;
+}
 let state = "start";
 let gameIsRunning = true; // A variable that detects if the game is running or not
 
-createCanvas(500, 700);
-
-// This is my function for the starry background, I stole it from Garrit
+// This is my function for the starry background, I stole it from chapter 15: Example - Night sky, on the foundations of programming website.
 function backGround() {
   push();
   noStroke();
@@ -22,13 +26,26 @@ let starY = [];
 let starAlpha = [];
 
 for (let i = 0; i < 300; i++) {
-  const x = Math.floor(Math.random() * width);
-  const y = Math.floor(Math.random() * height);
+  const x = Math.floor(Math.random() * 1200);
+  const y = Math.floor(Math.random() * 700);
   const alpha = Math.random();
 
   starX.push(x);
   starY.push(y);
   starAlpha.push(alpha);
+}
+
+// This is my function for the craters in the moonsurface
+function moonCrater(x, y, s) {
+  push();
+  noStroke();
+  fill(200);
+  ellipse(x + 3 * s, y + 3 * s, 40 * s);
+  fill(80);
+  ellipse(x, y, 40 * s);
+  fill(100);
+  ellipse(x + 1.5 * s, y + 1.5 * s, 40 * s);
+  pop();
 }
 
 // This is my function for the rocketship
@@ -140,7 +157,7 @@ function rocket(x, y, s) {
   vertex(x + 32 * s, y + 168 * s);
   vertex(x + 27 * s, y + 188 * s);
   vertex(x + 37 * s, y + 178 * s);
-  vertex(x + 50 * s, y + 203 * s); //Middle point
+  vertex(x + 50 * s, y + 203 * s);
   vertex(x + 63 * s, y + 178 * s);
   vertex(x + 73 * s, y + 188 * s);
   vertex(x + 68 * s, y + 168 * s);
@@ -156,7 +173,7 @@ function rocket(x, y, s) {
   vertex(x + 35 * s, y + 165 * s);
   vertex(x + 30 * s, y + 185 * s);
   vertex(x + 40 * s, y + 175 * s);
-  vertex(x + 50 * s, y + 200 * s); //Middle point
+  vertex(x + 50 * s, y + 200 * s);
   vertex(x + 60 * s, y + 175 * s);
   vertex(x + 70 * s, y + 185 * s);
   vertex(x + 65 * s, y + 165 * s);
@@ -165,19 +182,22 @@ function rocket(x, y, s) {
   endShape(CLOSE);
 }
 
+// Here is the function for the start screen
 function startScreen() {
   backGround();
   fill(255);
   textSize(60);
-  text("Lunar lander", 80, 225);
+  text("Lunar lander", 600, 300);
+  fill(180, 180, 180);
   textSize(30);
-  text("click to begin landing sequence", 40, 400);
+  text("click mouse to begin the landing sequence", 600, 400);
 }
 
 let rocketY = 0; // This allows us to add movement to the rocketship
 let velocity = 1;
 const acceleration = 0.2;
 
+// Here is the function for the actual game itself
 function gameScreen() {
   backGround();
 
@@ -185,11 +205,22 @@ function gameScreen() {
   fill(100);
   vertex(0, 600);
   vertex(0, 700);
-  vertex(500, 700);
-  vertex(500, 600);
+  vertex(1200, 700);
+  vertex(1200, 600);
   endShape();
+  moonCrater(100, 630, 1.3);
+  moonCrater(180, 680, 0.8);
+  moonCrater(300, 640, 1);
+  moonCrater(400, 630, 1.1);
+  moonCrater(480, 676, 0.9);
+  moonCrater(600, 640, 1.3);
+  moonCrater(700, 670, 1.1);
+  moonCrater(840, 640, 1.3);
+  moonCrater(920, 650, 1.4);
+  moonCrater(970, 680, 0.6);
+  moonCrater(1090, 660, 1);
 
-  rocket(200, rocketY, 0.8);
+  rocket(550, rocketY, 0.8);
 
   rocketY = rocketY + velocity;
   velocity = velocity + acceleration;
@@ -200,6 +231,7 @@ function gameScreen() {
     velocity = velocity - 4 * acceleration;
   }
 
+  // Both the if and else if statement will stop the game when the rocket is at a certain level
   if (rocketY > 480 && velocity > 4) {
     gameIsRunning = false;
   } else if (rocketY > 480 && velocity < 4) {
@@ -207,6 +239,7 @@ function gameScreen() {
   }
 }
 
+// Function for the screen when the landing is successfull
 function gameSuccess() {
   backGround();
 
@@ -214,17 +247,30 @@ function gameSuccess() {
   fill(100);
   vertex(0, 600);
   vertex(0, 700);
-  vertex(500, 700);
-  vertex(500, 600);
+  vertex(1200, 700);
+  vertex(1200, 600);
   endShape();
+  moonCrater(100, 630, 1.3);
+  moonCrater(180, 680, 0.8);
+  moonCrater(300, 640, 1);
+  moonCrater(400, 630, 1.1);
+  moonCrater(480, 676, 0.9);
+  moonCrater(600, 640, 1.3);
+  moonCrater(700, 670, 1.1);
+  moonCrater(840, 640, 1.3);
+  moonCrater(920, 650, 1.4);
+  moonCrater(970, 680, 0.6);
+  moonCrater(1090, 660, 1);
 
   fill(255);
   textSize(50);
-  text("Succesfull landing", 50, 225);
+  text("Succesfull landing!", 600, 300);
+  fill(180);
   textSize(30);
-  text("Click to restart", 150, 400);
+  text("Click mouse to restart", 600, 400);
 }
 
+// Function for the game over screen when you crash the rocketship
 function gameOver() {
   backGround();
 
@@ -232,17 +278,30 @@ function gameOver() {
   fill(100);
   vertex(0, 600);
   vertex(0, 700);
-  vertex(500, 700);
-  vertex(500, 600);
+  vertex(1200, 700);
+  vertex(1200, 600);
   endShape();
+  moonCrater(100, 630, 1.3);
+  moonCrater(180, 680, 0.8);
+  moonCrater(300, 640, 1);
+  moonCrater(400, 630, 1.1);
+  moonCrater(480, 676, 0.9);
+  moonCrater(600, 640, 1.3);
+  moonCrater(700, 670, 1.1);
+  moonCrater(840, 640, 1.3);
+  moonCrater(920, 650, 1.4);
+  moonCrater(970, 680, 0.6);
+  moonCrater(1090, 660, 1);
 
   fill(255);
   textSize(50);
-  text("Landing failed", 100, 225);
+  text("Landing failed...", 600, 300);
+  fill(180);
   textSize(30);
-  text("Click to restart", 150, 400);
+  text("Click mouse to restart", 600, 400);
 }
 
+// This function let's the player click the mouse in order to change game states... not while the game itself is running of course
 function mouseClicked() {
   if (state === "start") {
     state = "game";
@@ -253,6 +312,7 @@ function mouseClicked() {
   }
 }
 
+// Here I draw all of my game screens depending on the state of the game
 function draw() {
   if (state === "start") {
     startScreen();
@@ -264,12 +324,14 @@ function draw() {
     gameOver();
   }
 
+  // Here I stop the game if the rocket is at the correct level and the speed is slow enough, success
   if (gameIsRunning === false && velocity < 4) {
     state = "success";
     gameIsRunning = "true";
     rocketY = 0;
     velocity = 1;
   }
+  // Here I stop the game if the rocket is at the correct level but the speed is too high, fail!
   if (gameIsRunning === false && velocity > 4) {
     state = "fail";
     gameIsRunning = "true";
